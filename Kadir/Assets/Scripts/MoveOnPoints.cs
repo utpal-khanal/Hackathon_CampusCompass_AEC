@@ -31,24 +31,26 @@ public class MoveOnPoints : MonoBehaviour
     void Update()
     {
         float ySpeed = Input.GetAxis("Vertical") * speed * Time.deltaTime ;
+        float distance=1;
         //  ySpeed = Math.Clamp(ySpeed, 0f, 1f);
         if (ySpeed >= 0)
         {
             transform.position = Vector3.MoveTowards(transform.position, points[i].transform.position, ySpeed);
+            distance = Vector3.Distance(transform.position, points[i].transform.position);
 
         }
         else
         {
             if (i > 0)
             {
-                transform.position = Vector3.MoveTowards(transform.position, points[i - 1].transform.position, -ySpeed);
+                transform.position = Vector3.MoveTowards(transform.position, points[i-1].transform.position, -ySpeed);
+                distance = Vector3.Distance(transform.position, points[i-1].transform.position);
 
             }
         }
 
 
 
-        float distance = Vector3.Distance(transform.position, points[i].transform.position);
 
 
         if (distance <= 3)
@@ -59,13 +61,26 @@ public class MoveOnPoints : MonoBehaviour
 
             }
 
-
+            
             if (distance <= 0.1f)
             {
-                if (i < points.Count - 1)
+                if (i >= 0 || i < points.Count - 1  )
                 {
-                    i++;
+                    if(ySpeed >= 0)
+                    {
+                        if(i<points.Count - 1)
+                            i++;
+                    }
+                    else
+                    {
+                        if (i > 0)
+                        {
+                            i--;
+                        }
+                    }
                     cameraLook.setCamera(points[i].transform);
+                    //Debug.Log(ySpeed);
+
                 }
 
             }

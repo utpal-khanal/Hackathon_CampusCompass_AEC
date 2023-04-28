@@ -31,7 +31,7 @@ public class TargetIndigator : MonoBehaviour
         arrowAnimator.speed = arrowAnimationSpeed;
 
         tpos = target.position;
-        tpos += Vector3.up*2;
+        tpos += Vector3.up*1;
 
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(tpos-transform.position), rotationSpeed * Time.deltaTime);
 
