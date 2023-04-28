@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TargetIndigator : MonoBehaviour
 {
+    
     public Transform target;
     public float arrowAnimationSpeed = 1f;
     

@@ -8,7 +8,7 @@ public class CameraLook : MonoBehaviour
     public Transform player;
     public float minAutoMouseLook = 45f;
 
-    
+
 
     public float rotationSpeed;
 

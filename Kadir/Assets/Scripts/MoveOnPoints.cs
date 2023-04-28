@@ -7,6 +7,7 @@ public class MoveOnPoints : MonoBehaviour
 {
     public List<GameObject> points;
     public float speed = 10;
+    public float minLookDistance = 5;
     int i = 0;
     [SerializeField] TargetIndigator targetIndigator;
     [SerializeField] CameraLook cameraLook;
@@ -26,6 +27,11 @@ public class MoveOnPoints : MonoBehaviour
         
     }
 
+    public void SetWayPoints(List<GameObject> pointsList)
+    {
+        points.Clear();
+        points = pointsList;
+    }
 
     // Update is called once per frame
     void Update()
@@ -35,6 +41,10 @@ public class MoveOnPoints : MonoBehaviour
         //  ySpeed = Math.Clamp(ySpeed, 0f, 1f);
         if (ySpeed >= 0)
         {
+            /*if(i< points.Count) 
+            { 
+
+            }*/
             transform.position = Vector3.MoveTowards(transform.position, points[i].transform.position, ySpeed);
             distance = Vector3.Distance(transform.position, points[i].transform.position);
 
@@ -53,36 +63,37 @@ public class MoveOnPoints : MonoBehaviour
 
 
 
-        if (distance <= 3)
+        if (distance <= minLookDistance)
         {
             if (i < points.Count - 1)
             {
                 targetIndigator.setTarget(points[i + 1].transform);
+                 cameraLook.setCamera(points[i+1].transform);
 
             }
 
-            
+            if (i >= 0 || i < points.Count - 1)
+            {
+                if (ySpeed >= 0)
+                {
+                    if (i < points.Count - 1)
+                        i++;
+                }
+                else
+                {
+                    if (i > 0)
+                    {
+                        i--;
+                    }
+                }
+                // cameraLook.setCamera(points[i].transform);
+                //Debug.Log(ySpeed);
+
+            }
+
             if (distance <= 0.1f)
             {
-                if (i >= 0 || i < points.Count - 1  )
-                {
-                    if(ySpeed >= 0)
-                    {
-                        if(i<points.Count - 1)
-                            i++;
-                    }
-                    else
-                    {
-                        if (i > 0)
-                        {
-                            i--;
-                        }
-                    }
-                    cameraLook.setCamera(points[i].transform);
-                    //Debug.Log(ySpeed);
-
-                }
-
+                Debug.Log("reached goal");
             }
         }
        
