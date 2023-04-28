@@ -8,11 +8,18 @@ public class BFS : MonoBehaviour
 {
     public Node sourceNode;
     public Node destinationNode;
+    [SerializeField] MoveOnPoints moveOnPoints;
+    [SerializeField] CameraLook cameraLook;
+    [SerializeField] TargetIndigator arrowTarget;
+    [SerializeField] GameObject player;
+
 
     public List<Node> graph = new List<Node>();
 
+    public List<GameObject> shorestPathVertices = new List<GameObject>();
+
     // Start is called before the first frame update
-    
+
     List<Node> queueList = new List<Node>();
 
     EdgeGenerator edgeGenerator;
@@ -38,7 +45,10 @@ public class BFS : MonoBehaviour
     {
         edgeGenerator = FindObjectOfType<EdgeGenerator>();
 
-       // FindShortestPath();
+        player.GetComponent<PlayerMove>().enabled = true;
+        player.GetComponent<MoveOnPoints>().enabled = false;
+
+        // FindShortestPath();
 
     }
 
@@ -91,14 +101,43 @@ public class BFS : MonoBehaviour
         EdgeGenerator.SetEdgeVisibilityEvent?.Invoke(false);
 
         shorestPathEdges = new List<GameObject>();
+        shorestPathVertices.Clear();
+        shorestPathVertices = new List<GameObject>();
 
-        while (currentNode.parentNode != null)
+        while (currentNode != null)
         {
-            GameObject edge = edgeGenerator.CreaterEdgeFor(currentNode.gameObject, currentNode.parentNode.gameObject);
+            if(currentNode.parentNode != null)
+            {
+                GameObject edge = edgeGenerator.CreaterEdgeFor(currentNode.gameObject, currentNode.parentNode.gameObject);
+
+                edge.layer = LayerMask.NameToLayer("graph");
+
+                edge.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("graph");
+                //shorestPathEdges.Add(edge); // if need edges then add shortest path edges;
+
+            }
+            shorestPathVertices.Add(currentNode.gameObject);
+
             currentNode = currentNode.parentNode;
 
-            shorestPathEdges.Add(edge);
-        }       
+        }
+
+        moveOnPoints.SetWayPoints(shorestPathVertices);
+        cameraLook.setCamera(shorestPathVertices[0].transform);
+        arrowTarget.setTarget(shorestPathVertices[0].transform);
+
+        player.GetComponent<MoveOnPoints>().enabled = true;
+        player.GetComponent<PlayerMove>().enabled = false;
+
+
+
+
+
+
+
+
+
+        
 
         ResetGraph();
 
