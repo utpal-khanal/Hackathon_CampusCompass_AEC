@@ -1,1 +1,2 @@
-Test file
+A Campus Wayfinding Application
+by - Team Campus Compass
