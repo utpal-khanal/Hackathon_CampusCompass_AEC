@@ -245,3 +245,15 @@ Received Import Request.
   path: Assets/cur Model/train.blend
   artifactKey: Guid(4ea07854af7542147810ad695d9c477e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/cur Model/train.blend using Guid(4ea07854af7542147810ad695d9c477e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9ea8adf8ab24cb59d83b5dcea30dfa6') in 0.672650 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1796.954469 seconds.
+  path: Assets/cur Model/train.blend
+  artifactKey: Guid(4ea07854af7542147810ad695d9c477e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/cur Model/train.blend using Guid(4ea07854af7542147810ad695d9c477e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '28fc4637d75c4b01db4b9fc506d3851c') in 0.717819 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1657.006615 seconds.
+  path: Assets/cur Model/train.blend
+  artifactKey: Guid(4ea07854af7542147810ad695d9c477e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/cur Model/train.blend using Guid(4ea07854af7542147810ad695d9c477e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5c8236b975210b31a54124982c9b53d1') in 1.777538 seconds 
