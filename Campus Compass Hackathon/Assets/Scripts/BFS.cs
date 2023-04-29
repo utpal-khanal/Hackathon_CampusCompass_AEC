@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class BFS : MonoBehaviour
 {
+    public static bool forAndroid = false;
+    public bool android = false;
     public Node sourceNode;
     public Node destinationNode;
     [SerializeField] MoveOnPoints moveOnPoints;
@@ -16,6 +18,7 @@ public class BFS : MonoBehaviour
     [SerializeField] Animator fadeBackOutAnimator;
     [SerializeField] GameObject goButton;
     [SerializeField] GameObject closeButton;
+    [SerializeField] GameObject destinationReachedText;
 
 
     public List<Node> graph = new List<Node>();
@@ -49,6 +52,7 @@ public class BFS : MonoBehaviour
 
     void Start()
     {
+        forAndroid = android;
         edgeGenerator = FindObjectOfType<EdgeGenerator>();
 
         prevHeight = cameraLook.transform.localPosition.y;
@@ -71,6 +75,8 @@ public class BFS : MonoBehaviour
         goButton.gameObject.SetActive(true);
         cameraLook.transform.localPosition = new Vector3
             (cameraLook.transform.localPosition.x, prevHeight, cameraLook.transform.localPosition.z);
+        destinationReachedText.SetActive(false);
+
     }
 
      [ContextMenu("Find Shortest Path")]

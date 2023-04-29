@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class MoveOnPoints : MonoBehaviour
 {
     public List<GameObject> points;
@@ -12,6 +12,12 @@ public class MoveOnPoints : MonoBehaviour
     [SerializeField] TargetIndigator targetIndigator;
     [SerializeField] CameraLook cameraLook;
     [SerializeField] GameObject destinationReachedText;
+    [SerializeField] GameObject arrow;
+    [SerializeField] Button upButton;
+    [SerializeField] Button downButton;
+
+    public bool upPressed = false;
+    public bool downPressed = false;
 
     private void OnEnable()
     {
@@ -40,11 +46,39 @@ public class MoveOnPoints : MonoBehaviour
         points = pointsList;
     }
 
+
+
+
     // Update is called once per frame
     void Update()
     {
+
+        
+
         float ySpeed = Input.GetAxis("Vertical") * speed * Time.deltaTime ;
-        float distance=1;
+        
+        if (BFS.forAndroid)
+        {
+            if (upPressed )
+            {
+                ySpeed = 1 * speed * Time.deltaTime;
+            }
+            else if(downPressed)
+            {
+                ySpeed = -1 * speed * Time.deltaTime;
+            }
+            else
+            {
+                ySpeed = 0;
+            }
+        }
+
+        
+        
+        
+
+
+        float distance =1;
         //  ySpeed = Math.Clamp(ySpeed, 0f, 1f);
         if (ySpeed >= 0)
         {
@@ -105,11 +139,14 @@ public class MoveOnPoints : MonoBehaviour
             {
 
                 destinationReachedText.SetActive(true);
+                arrow.SetActive(false);
 
             }
             else
             {
                 destinationReachedText.SetActive(false);
+                arrow.SetActive(true);
+
             }
 
 
